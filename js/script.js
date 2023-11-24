@@ -18,8 +18,8 @@ const wordsToTranslate = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    let showUserResult = false; // Показ результату
     let userFieldActive = true; // Користувач може ввести переклад
+    let showUserResult = false;
     let actualStage = 0; // Етап, на якому знаходиться користувач
     let numberOfCards = wordsToTranslate.lenth;
     let wordsLeft = numberOfCards;
@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Користувач переклав усі слова
         if (wordsLeft == 0 && !showUserResult) { information(); showUserResult = true; }
     }
-
     // Модальне вікно
     function information() {
         let wind = " Your result is " + translatedCorrectly + " correct out of " + numberOfCards + " words. To try again, refresh the page.";
@@ -118,31 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
             inputNotAllowed();
             // Нова відповідь -> нові результати
             if (wordsToTranslate_array[actualStage].answer == '') { userScore(); newResults(); }
-            noUserWord();
-            actualStage--;
-            newStage();
-
-            /*$("#test-card").hide("slide", { direction: "right" }, 250).promise().done(function () {
-                $("#word-to-translate").html(wordsToTranslate_array[actualStage].en);
-                $("#test-card").show("slide", 250).promise().done(inputAllowed);
-            });*/
-
+            noUserWord(); actualStage--; newStage();
             $("#test-card").fadeTo(500, 0.2).promise().done(function () {
                 $("#word-to-translate").html(wordsToTranslate_array[actualStage].en);
                 $("#test-card").fadeTo(500, 1).promise().done(inputAllowed);
             });
-
-            /*$(document).ready(function(){
-                
-                $("#test-card").hide();
-                
-                
-                $("#test-card").show();
-                
-              });*/
-
-
-            /*$("#test-card").on("click", {transform: "center", transition: "all .7s ease"});*/
         }
     });
 
@@ -155,15 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             inputNotAllowed();
             // Нова відповідь -> нові результати
             if (wordsToTranslate_array[actualStage].answer == '') { userScore(); newResults(); }
-            noUserWord();
-            actualStage++;
-            newStage();
-
-            /*$("#test-card").hide("slide", 250).promise().done(function () {
-                $("#word-to-translate").html(wordsToTranslate_array[actualStage].en);
-                $("#test-card").show("slide", { direction: "right" }, 250).promise().done(inputAllowed);
-            });*/
-
+            noUserWord(); actualStage++; newStage();
             $("#test-card").fadeTo(500, 0.2).promise().done(function () {
                 $("#word-to-translate").html(wordsToTranslate_array[actualStage].en);
                 $("#test-card").fadeTo(500, 1).promise().done(inputAllowed);
